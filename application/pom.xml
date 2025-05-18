@@ -21,12 +21,12 @@
     <dependencies>
         <dependency>
             <groupId>pl.wsei</groupId>
-            <artifactId>user</artifactId>
+            <artifactId>worklog</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pl.wsei</groupId>
-            <artifactId>company</artifactId>
+            <artifactId>task</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

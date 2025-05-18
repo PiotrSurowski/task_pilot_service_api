@@ -28,8 +28,8 @@
 	</developers>
     <modules>
         <module>application</module>
-		<module>user</module>
-		<module>company</module>
+		<module>task</module>
+		<module>worklog</module>
 	</modules>
     <scm>
 		<connection/>
