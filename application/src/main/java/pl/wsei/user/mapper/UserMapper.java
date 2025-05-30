@@ -1,0 +1,19 @@
+package pl.wsei.user.mapper;
+
+import pl.wsei.user.User;
+import pl.wsei.user.UserDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface UserMapper {
+
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "role.id", target = "roleId")
+    UserDto toDto(User user);
+
+    User toModel(UserDto dto);
+}
