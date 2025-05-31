@@ -21,9 +21,4 @@ public class TaskController {
     ) {
         return ResponseEntity.ok(taskService.register(request));
     }
-
-    @GetMapping("/test")
-    public String getTest(){
-        return "Task endpoint";
-    }
 }
