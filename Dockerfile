@@ -1,23 +1,22 @@
-# Używamy oficjalnego obrazu Javy 21
 FROM openjdk:21
 
-# Ustawiamy katalog roboczy
 WORKDIR /app
 
-# Kopiujemy plik pom.xml i ściągamy zależności
-COPY pom.xml mvnw mvnw.cmd /app/
-COPY .mvn /app/.mvn
-RUN chmod +x /app/mvnw
-RUN /app/mvnw dependency:go-offline
-
-# Kopiujemy cały projekt
+# Kopiujemy wszystko naraz — ważne, by wcześniej!
 COPY . /app/
 
+# Ustawiamy uprawnienia do wrappera Mavena
+RUN chmod +x ./mvnw
+
+# Pobieramy zależności (moduły już są dostępne)
+RUN ./mvnw dependency:go-offline
+
 # Budujemy aplikację
-RUN /app/mvnw clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
-# Upewniamy się, że JAR faktycznie się skopiował
-RUN ls -lah /app/target/
+# Pokazujemy co jest w target
+RUN ls -lah /app/**/target/
 
-# Uruchamiamy aplikację
-CMD ["java", "-jar", "/app/target/task-pilot-0.0.1-SNAPSHOT.jar"]
+# Uruchamiamy główny JAR (zmodyfikuj nazwę jeśli inaczej się nazywa)
+CMD ["java", "-jar", "/app/application/target/application-0.0.1-SNAPSHOT.jar"]
+
