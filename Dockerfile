@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Kopiujemy wrappera i pliki podstawowe
 COPY .mvn .mvn
-COPY mvnw pom.xml ./
+COPY mvnw pom.xml application/pom.xml task/pom.xml worklog/pom.xml ./
 
 # Teraz kopiujemy resztę projektu (moduły muszą być dostępne!)
 COPY . .
