@@ -69,6 +69,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>pl.wsei.Application</mainClass>
+					<layout>JAR</layout>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -76,10 +80,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<mainClass>pl.wsei.Application</mainClass>
-					<layout>JAR</layout>
-				</configuration>
 			</plugin>
 		</plugins>
 		</pluginManagement>

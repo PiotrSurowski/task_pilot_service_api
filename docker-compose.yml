@@ -19,7 +19,7 @@ services:
     environment:
       POSTGRES_USER: piotrek
       POSTGRES_PASSWORD: 248862
-      POSTGRES_DB: label-printer-PROD
+      POSTGRES_DB: INV-sec-DEV
     ports:
       - "5432:5432"
     networks:
