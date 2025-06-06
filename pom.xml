@@ -76,6 +76,10 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<mainClass>pl.wsei.Application</mainClass>
+					<layout>JAR</layout>
+				</configuration>
 			</plugin>
 		</plugins>
 		</pluginManagement>
