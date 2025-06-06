@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8999:8999"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/INV-sec-DEV
+      SPRING_DATASOURCE_USERNAME: piotrek
+      SPRING_DATASOURCE_PASSWORD: 248862
+    depends_on:
+      - postgres-db
+    networks:
+      - app-network
+
+  postgres-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: piotrek
+      POSTGRES_PASSWORD: 248862
+      POSTGRES_DB: label-printer-PROD
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
