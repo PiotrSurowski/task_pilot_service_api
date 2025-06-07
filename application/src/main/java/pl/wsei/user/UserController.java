@@ -24,8 +24,11 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = service.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        List<UserDto> users = service.getAllUsers()
+                .stream()
+                .map(user -> new UserDto(user.getId(), user.getRole().getId(), user.getLogin(), user.getEmail()))
+                .toList();
         return ResponseEntity.ok(users);
     }
 }
