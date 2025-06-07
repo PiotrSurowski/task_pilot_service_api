@@ -63,6 +63,7 @@ public class AuthenticationService {
     var refreshToken = jwtService.generateRefreshToken(user);
     //revokeAllUserTokens(user);
     removeAllUserTokens(user);
+
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
@@ -75,6 +76,7 @@ public class AuthenticationService {
     if (userTokens.isEmpty())
       return;
     tokenRepository.deleteAll(userTokens);
+    tokenRepository.flush();
   }
   private void saveUserToken(User user, String jwtToken) {
     Calendar calendar = Calendar.getInstance();
