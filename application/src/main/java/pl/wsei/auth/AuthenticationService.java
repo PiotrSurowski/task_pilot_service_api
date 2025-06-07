@@ -1,5 +1,6 @@
 package pl.wsei.auth;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import pl.wsei.config.JwtService;
 import pl.wsei.token.Token;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +53,7 @@ public class AuthenticationService {
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    Map<String, Object> extraClaims = new HashMap<>();
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
@@ -59,7 +62,9 @@ public class AuthenticationService {
     );
     var user = repository.findByEmail(request.getEmail())
         .orElseThrow();
-    var jwtToken = jwtService.generateToken(user);
+    List<String> roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+    extraClaims.put("role", roles);
+    var jwtToken = jwtService.generateToken(extraClaims, user);
     var refreshToken = jwtService.generateRefreshToken(user);
     //revokeAllUserTokens(user);
     removeAllUserTokens(user);

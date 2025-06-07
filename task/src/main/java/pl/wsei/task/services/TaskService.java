@@ -1,6 +1,5 @@
 package pl.wsei.task.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import pl.wsei.task.entities.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
