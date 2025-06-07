@@ -56,7 +56,7 @@ public enum Role {
     return authorities;
   }
 
-  public Role getRoleById(int id){
+  public static Role getRoleById(int id){
     return Arrays.stream(Role.values()).filter(role -> id == role.getId())
             .findFirst()
             .orElse(null);

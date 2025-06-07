@@ -38,7 +38,7 @@ public class AuthenticationService {
         .login(request.getLogin())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.ADMIN)
+        .role(Role.getRoleById(request.getRoleId()))
             .isActive(true)
         .build();
 
