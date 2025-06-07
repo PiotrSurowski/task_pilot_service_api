@@ -36,9 +36,4 @@ public class AuthenticationController {
   ) throws IOException {
     service.refreshToken(request, response);
   }
-
-  @GetMapping("/test")
-  public String getTest(){
-    return "Auth endpoint";
-  }
 }
