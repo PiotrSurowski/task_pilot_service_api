@@ -61,7 +61,8 @@ public class AuthenticationService {
         .orElseThrow();
     var jwtToken = jwtService.generateToken(user);
     var refreshToken = jwtService.generateRefreshToken(user);
-    revokeAllUserTokens(user);
+    //revokeAllUserTokens(user);
+    removeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
@@ -69,6 +70,12 @@ public class AuthenticationService {
         .build();
   }
 
+  private void removeAllUserTokens(User user){
+    var userTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+    if (userTokens.isEmpty())
+      return;
+    tokenRepository.deleteAll(userTokens);
+  }
   private void saveUserToken(User user, String jwtToken) {
     Calendar calendar = Calendar.getInstance();
     calendar.add(Calendar.MONTH, 1);
