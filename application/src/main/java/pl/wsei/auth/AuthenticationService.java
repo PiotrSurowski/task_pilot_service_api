@@ -63,7 +63,9 @@ public class AuthenticationService {
     var user = repository.findByEmail(request.getEmail())
         .orElseThrow();
     List<String> roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+    Integer userId = user.getId();
     extraClaims.put("role", roles);
+    extraClaims.put("userId", userId);
     var jwtToken = jwtService.generateToken(extraClaims, user);
     var refreshToken = jwtService.generateRefreshToken(user);
     //revokeAllUserTokens(user);
