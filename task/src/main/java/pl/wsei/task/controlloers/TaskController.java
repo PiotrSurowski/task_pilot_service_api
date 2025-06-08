@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.wsei.task.requests.CreateTaskRequest;
 import pl.wsei.task.requests.TaskCreationResponse;
+import pl.wsei.task.requests.TaskGetResponse;
 import pl.wsei.task.services.TaskService;
 
 @RestController
@@ -20,5 +21,16 @@ public class TaskController {
             @RequestBody CreateTaskRequest request
     ) {
         return ResponseEntity.ok(taskService.register(request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Integer id) {
+        taskService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/performer/{id}")
+    public ResponseEntity<TaskGetResponse> getTasksByPerformer(@PathVariable Integer id) {
+        TaskGetResponse tasks = taskService.getTasksByUser(id);
+        return ResponseEntity.ok(tasks);
     }
 }
