@@ -19,4 +19,5 @@ public class Task {
     private String title;
     @Column(name = "performer_id")
     private Integer performerId;
+    private Integer status;
 }

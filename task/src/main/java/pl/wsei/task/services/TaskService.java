@@ -9,8 +9,9 @@ import pl.wsei.task.repositories.TaskRepository;
 import pl.wsei.task.requests.CreateTaskRequest;
 import pl.wsei.task.requests.TaskCreationResponse;
 import pl.wsei.task.requests.TaskGetResponse;
-
+import pl.wsei.task.requests.TaskUpdateRequest;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,5 +43,14 @@ public class TaskService {
     }
     public void delete(Integer id) {
         taskRepository.deleteById(id);
+    }
+
+    public boolean updateTask(TaskUpdateRequest request) {
+        return taskRepository.findById(request.getId())
+                .map(task -> {
+                    task.setStatus(request.getStatusId());
+                    return true;
+                })
+                .orElse(false);
     }
 }
