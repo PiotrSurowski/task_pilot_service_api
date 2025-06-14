@@ -36,21 +36,25 @@ public class PresenceService {
         }
     }
     public void saveEndPresence(Integer userId) {
+        System.out.println(">>> saveEndPresence() - szukam obecności dla userId = " + userId);
+
         LocalDate today = LocalDate.now();
         Date startOfDay = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date endOfDay = Date.from(today.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        Optional<Presence> optionalPresence = presenceRepository.findLatestUnfinishedPresenceToday(userId, startOfDay, endOfDay);
-
+        Optional<Presence> optionalPresence = presenceRepository
+                .findFirstByUserIdAndDateStartBetweenAndDateFinishIsNullOrderByDateStartDesc(
+                        userId, startOfDay, endOfDay);
 
         if (optionalPresence.isPresent()) {
+            System.out.println(">>> Znaleziono obecność, ustawiam date_finish");
             Presence presence = optionalPresence.get();
             presence.setDateFinish(new Date());
             presenceRepository.save(presence);
-            System.out.println("Zapisano zakonczenie " + userId);
         } else {
-            System.out.println("Brak aktywnej obecności do zakończenia.");
+            System.out.println(">>> Brak aktywnej obecności do zakończenia (null)");
         }
     }
+
 
 }
