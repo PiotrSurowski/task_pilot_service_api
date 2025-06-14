@@ -56,5 +56,6 @@ public class WorkLogService {
 
     public void deleteWorkLog(Integer id){
         this.workLogRepository.deleteById(id);
+        this.workLogRepository.flush();
     }
 }
