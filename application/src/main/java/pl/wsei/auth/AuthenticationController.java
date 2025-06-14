@@ -36,4 +36,9 @@ public class AuthenticationController {
   ) throws IOException {
     service.refreshToken(request, response);
   }
+
+  @PostMapping("/logout")
+  public void logout(@RequestParam Integer userId){
+    service.logout(userId);
+  }
 }

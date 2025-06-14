@@ -32,6 +32,7 @@ public class AuthenticationService {
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final PresenceEventService presenceEventService;
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = User.builder()
@@ -70,8 +71,8 @@ public class AuthenticationService {
     var refreshToken = jwtService.generateRefreshToken(user);
     //revokeAllUserTokens(user);
     removeAllUserTokens(user);
-
     saveUserToken(user, jwtToken);
+    presenceEventService.handleStart(userId);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)
@@ -136,5 +137,9 @@ public class AuthenticationService {
         new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
       }
     }
+  }
+
+  public void logout(Integer userId) {
+    this.presenceEventService.handleEnd(userId);
   }
 }

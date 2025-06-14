@@ -5,6 +5,7 @@ import pl.wsei.task.entities.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.wsei.task.enums.TaskStatus;
 import pl.wsei.task.repositories.TaskRepository;
 import pl.wsei.task.requests.CreateTaskRequest;
 import pl.wsei.task.requests.TaskCreationResponse;
@@ -24,6 +25,7 @@ public class TaskService {
                         .title(taskRequest.getTitle())
                                 .description(taskRequest.getDescription())
                                         .performerId(taskRequest.getPerformerId())
+                .status(TaskStatus.NEW.getId())
                                                 .build();
         Task savedTask = taskRepository.save(task);
 
