@@ -6,9 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.wsei.worklog.entities.Presence;
 import pl.wsei.worklog.repositories.PresenceRepository;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;

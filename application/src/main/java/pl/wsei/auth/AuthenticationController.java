@@ -38,7 +38,7 @@ public class AuthenticationController {
   }
 
   @PostMapping("/logout")
-  public void logout(@RequestParam Integer userId){
-    service.logout(userId);
+  public void logout(LogoutRequest logoutRequest){
+    service.logout(logoutRequest);
   }
 }

@@ -139,7 +139,7 @@ public class AuthenticationService {
     }
   }
 
-  public void logout(Integer userId) {
-    this.presenceEventService.handleEnd(userId);
+  public void logout(LogoutRequest logoutRequest) {
+    this.presenceEventService.handleEnd(logoutRequest.getUserId());
   }
 }
