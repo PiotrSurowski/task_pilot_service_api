@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 @Service
 @RequiredArgsConstructor
 public class PresenceEventService {
-    ApplicationEventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
     public void handleStart(Integer userId) {
         eventPublisher.publishEvent(new PresenceStartEvent(userId));
         Logger.getAnonymousLogger().info("Login event send " + userId);
