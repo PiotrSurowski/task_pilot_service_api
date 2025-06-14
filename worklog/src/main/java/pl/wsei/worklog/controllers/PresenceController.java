@@ -1,10 +1,7 @@
 package pl.wsei.worklog.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.wsei.worklog.requests.LogoutRequest;
 import pl.wsei.worklog.services.PresenceService;
 
@@ -15,7 +12,7 @@ import pl.wsei.worklog.services.PresenceService;
 public class PresenceController {
     private final PresenceService service;
     @PostMapping("/logout")
-    public void logout(LogoutRequest logoutRequest){
+    public void logout(@RequestBody LogoutRequest logoutRequest){
         service.saveEndPresence(logoutRequest.getUserId());
     }
 }
