@@ -50,6 +50,7 @@ public class PresenceService {
             Presence presence = optionalPresence.get();
             presence.setDateFinish(new Date());
             presenceRepository.save(presence);
+            System.out.println("Zapisano zakonczenie " + userId);
         } else {
             System.out.println("Brak aktywnej obecności do zakończenia.");
         }
