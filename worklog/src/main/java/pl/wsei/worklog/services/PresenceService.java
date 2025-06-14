@@ -42,9 +42,8 @@ public class PresenceService {
         Date startOfDay = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date endOfDay = Date.from(today.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-        Optional<Presence> optionalPresence = presenceRepository.findFirstByUserIdAndDateStartBetweenAndDateFinishIsNullOrderByDateStartDesc(
-                userId, startOfDay, endOfDay
-        );
+        Optional<Presence> optionalPresence = presenceRepository.findLatestUnfinishedPresenceToday(userId, startOfDay, endOfDay);
+
 
         if (optionalPresence.isPresent()) {
             Presence presence = optionalPresence.get();

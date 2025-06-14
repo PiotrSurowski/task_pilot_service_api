@@ -14,11 +14,13 @@ public class PresenceEventHandler {
 
     @EventListener
     public void handlePresenceStart(PresenceStartEvent event) {
+        System.out.println("Odebrany start event " + event.getUserId());
         presenceService.saveStartPresence(event.getUserId());
     }
 
     @EventListener
     public void handlePresenceEnd(PresenceEndEvent event) {
+        System.out.println("Odebrano end event " + event.getUserId());
         presenceService.saveEndPresence(event.getUserId());
     }
 }
