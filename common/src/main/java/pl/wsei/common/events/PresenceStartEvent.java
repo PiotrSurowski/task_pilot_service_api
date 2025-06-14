@@ -1,4 +1,4 @@
-package pl.wsei.events;
+package pl.wsei.common.events;
 
 public class PresenceStartEvent {
     private final Integer userId;

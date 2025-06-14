@@ -30,7 +30,8 @@
         <module>application</module>
 		<module>task</module>
 		<module>worklog</module>
-	</modules>
+        <module>common</module>
+    </modules>
     <scm>
 		<connection/>
 		<developerConnection/>

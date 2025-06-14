@@ -1,11 +1,10 @@
 package pl.wsei.auth;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-import pl.wsei.events.PresenceEndEvent;
-import pl.wsei.events.PresenceStartEvent;
+import pl.wsei.common.events.PresenceEndEvent;
+import pl.wsei.common.events.PresenceStartEvent;
 
 import java.util.logging.Logger;
 
