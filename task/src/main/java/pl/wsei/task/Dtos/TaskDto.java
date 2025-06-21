@@ -11,4 +11,5 @@ public class TaskDto {
     private String description;
     private String title;
     private Integer performerId;
+    private Integer statusId;
 }

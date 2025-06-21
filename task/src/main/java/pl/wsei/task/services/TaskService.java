@@ -24,7 +24,7 @@ public class TaskService {
                         .title(taskRequest.getTitle())
                                 .description(taskRequest.getDescription())
                                         .performerId(taskRequest.getPerformerId())
-                .status(TaskStatus.NEW.getId())
+                .statusId(TaskStatus.NEW.getId())
                                                 .build();
         Task savedTask = taskRepository.save(task);
 
@@ -38,6 +38,7 @@ public class TaskService {
                         .title(task.getTitle())
                         .description(task.getDescription())
                         .performerId(task.getPerformerId())
+                        .statusId(task.getStatusId())
                         .build())
                 .toList();
         return new TaskGetResponse(taskDtos);
@@ -49,7 +50,7 @@ public class TaskService {
     public boolean updateTask(TaskUpdateRequest request) {
         return taskRepository.findById(request.getId())
                 .map(task -> {
-                    task.setStatus(request.getStatusId());
+                    task.setStatusId(request.getStatusId());
                     switch (request.getStatusId()) {
                         case 2 -> taskStatusEventService.handleStart(request.getId(), request.getPerformerId());
                         case 3 -> taskStatusEventService.handleEnd(request.getId(), request.getPerformerId());
