@@ -58,6 +58,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/task/create").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/task/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/task/performer/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/task/update").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/api/user/getAll").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                                 .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
