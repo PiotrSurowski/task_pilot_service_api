@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 @Service
 @RequiredArgsConstructor
 public class TaskStatusEventService {
-    private ApplicationEventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
     public void handleStart(Integer taskId, Integer userId) {
         eventPublisher.publishEvent(new TaskStatusStartEvent(taskId, userId));
