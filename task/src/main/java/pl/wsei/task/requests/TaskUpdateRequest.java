@@ -11,4 +11,5 @@ import pl.wsei.task.enums.TaskStatus;
 public class TaskUpdateRequest {
     private Integer id;
     private Integer statusId;
+    private Integer performerId;
 }

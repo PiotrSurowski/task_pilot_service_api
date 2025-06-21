@@ -12,14 +12,13 @@ import pl.wsei.task.requests.TaskCreationResponse;
 import pl.wsei.task.requests.TaskGetResponse;
 import pl.wsei.task.requests.TaskUpdateRequest;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class TaskService {
     private final TaskRepository taskRepository;
+    private final TaskStatusEventService taskStatusEventService;
     public TaskCreationResponse register(CreateTaskRequest taskRequest) {
         Task task = Task.builder()
                         .title(taskRequest.getTitle())
@@ -51,6 +50,10 @@ public class TaskService {
         return taskRepository.findById(request.getId())
                 .map(task -> {
                     task.setStatus(request.getStatusId());
+                    switch (request.getStatusId()) {
+                        case 2 -> taskStatusEventService.handleStart(request.getId(), request.getPerformerId());
+                        case 3 -> taskStatusEventService.handleEnd(request.getId(), request.getPerformerId());
+                    }
                     return true;
                 })
                 .orElse(false);

@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.wsei.worklog.entities.WorkLog;
 
+import java.util.Optional;
+
 @Repository
 public interface WorkLogRepository extends JpaRepository<WorkLog, Integer> {
+    Optional<WorkLog> findByTaskIdAndPerformerId(Integer taskId, Integer performerId);
 }

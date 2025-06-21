@@ -10,6 +10,7 @@ import pl.wsei.worklog.repositories.WorkLogRepository;
 import pl.wsei.worklog.requests.SaveWorklogRequest;
 import pl.wsei.worklog.requests.WorkLogCreationResponse;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -53,6 +54,29 @@ public class WorkLogService {
         workLogRepository.save(existingWorkLog);
     }
 
+    public void saveTaskStart(Integer taskId, Integer performerId) {
+        WorkLog workLog = workLogRepository
+                .findByTaskIdAndPerformerId(taskId, performerId)
+                .orElseGet(() -> WorkLog.builder()
+                        .taskId(taskId)
+                        .performerId(performerId)
+                        .build());
+
+        workLog.setDateStart(new Date());
+        workLogRepository.save(workLog);
+    }
+
+    public void saveTaskFinish(Integer taskId, Integer performerId) {
+        WorkLog workLog = workLogRepository
+                .findByTaskIdAndPerformerId(taskId, performerId)
+                .orElseGet(() -> WorkLog.builder()
+                        .taskId(taskId)
+                        .performerId(performerId)
+                        .build());
+
+        workLog.setDateFinish(new Date());
+        workLogRepository.save(workLog);
+    }
 
     public void deleteWorkLog(Integer id){
         this.workLogRepository.deleteById(id);
