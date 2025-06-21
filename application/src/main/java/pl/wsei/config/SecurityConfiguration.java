@@ -56,7 +56,7 @@ public class SecurityConfiguration {
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/task/create").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/api/task/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/task/delete/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/task/performer/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/task/update").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/api/user/getAll").hasRole("ADMIN")
